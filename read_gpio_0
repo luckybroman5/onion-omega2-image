@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Setups gpio 0 for input, then reads it's value
+
+GPIO_MODE=$(fast-gpio get-direction 0)
+GPIO_TEST='> Get direction GPIO0: input'
+echo $GPIO_MODE
+echo $GPIO_TEST
+
+if [ "$GPIO_TEST" != "$GPIO_MODE" ]
+then
+fast-gpio set-input 0
+fi
+
+READING=$(fast-gpio read 0)
+
+if [ "$READING" = "> Read GPIO0: 0" ]
+then
+echo  0
+else
+echo 1
+fi
+
